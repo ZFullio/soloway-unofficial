@@ -96,7 +96,6 @@ class Client:
         for placement in tqdm(self.placements_guid):
             data = self.get_placement_stat_by_day(placement, start_date, stop_date)
             report.append(data)
-        logger.success("Данные собраны")
         self.report = report
         return self.report
 

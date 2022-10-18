@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "soloway_unofficial"
-version = "1.0.1"
+version = "1.0.2"
 description = "Простейшая реализация SDK для https://dsp.soloway.ru/"
 license = "MIT"
 authors = ["viktor <vi.dave@yandex.ru>"]
