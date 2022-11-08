@@ -24,4 +24,7 @@ def test_get_placements_stat_all():
 
 def test_get_placements_stat_by_day():
     data = client.get_placements_stat_by_day(date_start, date_stop)
+    result: list = []
+    for row in data:
+        result.extend(row['list'])
     assert data
