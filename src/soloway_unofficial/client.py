@@ -2,6 +2,9 @@ import time
 
 import requests
 from tqdm import tqdm
+from datetime import date
+
+DATE_FORMAT = "%Y-%m-%d"
 
 
 class Client:
@@ -54,7 +57,7 @@ class Client:
         placements = [placement['doc']["guid"] for placement in tqdm(self.placements)]
         self.placements_guid = placements
 
-    def get_placements_stat_all(self, start_date: str, stop_date: str, with_archived: bool = False) -> list[dict]:
+    def get_placements_stat_all(self, start_date: date, stop_date: date, with_archived: bool = False) -> list[dict]:
         self.report = []
         if not self.x_sid:
             self.login()
@@ -62,13 +65,13 @@ class Client:
             self.get_placements()
         return self.get_placements_stat(self.placements_guid, start_date, stop_date, with_archived=with_archived)
 
-    def get_placements_stat(self, placement_ids: [str], start_date: str, stop_date: str,
+    def get_placements_stat(self, placement_ids: [str], start_date: date, stop_date: date,
                             with_archived: bool = False) -> list[dict]:
         if not self.x_sid:
             self.login()
         payload = {"placement_ids": placement_ids,
-                   "start_date": start_date,
-                   "stop_date": stop_date}
+                   "start_date": start_date.strftime(DATE_FORMAT),
+                   "stop_date": stop_date.strftime(DATE_FORMAT)}
         if with_archived:
             payload["with_archived"] = 1
         headers = self.__build_header()
@@ -78,9 +81,9 @@ class Client:
             raise ConnectionError(resp.text)
         return resp.json()
 
-    def get_placement_stat_by_day(self, placement_guid: str, start_date: str, stop_date: str) -> dict | None:
-        payload = {"start_date": start_date,
-                   "stop_date": stop_date}
+    def get_placement_stat_by_day(self, placement_guid: str, start_date: date, stop_date: date) -> dict | None:
+        payload = {"start_date": start_date.strftime(DATE_FORMAT),
+                   "stop_date": stop_date.strftime(DATE_FORMAT)}
         headers = self.__build_header()
         time.sleep(1)
         resp = requests.post(f"{self.HOST}placements/{placement_guid}/stat", json=payload, headers=headers)
@@ -88,7 +91,7 @@ class Client:
             raise ConnectionError(resp.text)
         return resp.json()
 
-    def get_placements_stat_by_day(self, start_date: str, stop_date: str) -> list[dict] | None:
+    def get_placements_stat_by_day(self, start_date: date, stop_date: date) -> list[dict] | None:
         self.report = []
         if not self.placements:
             self.get_placements()

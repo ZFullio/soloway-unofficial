@@ -1,8 +1,10 @@
+from datetime import date
+
 from src.soloway_unofficial import Client
 
 client = Client("YOUR_LOGIN", "YOUR_PASSWORD")
-date_start = "2022-08-16"
-date_stop = "2022-10-15"
+date_start = date(2022, 1, 1)
+date_stop = date(2022, 12, 31)
 
 
 def test_login():

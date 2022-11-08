@@ -23,32 +23,28 @@ client = Client("YOUR_LOGIN", "YOUR_PASSWORD")
 ```    
 
 Получение статистики размещений по всем кампаниям.
-* ``start_date — дата начала(включительно) периода в формате YYYY-MM-DD``
-* ``stop_date — дата конца(включительно) периода, в формате YYYY-MM-DD``
-
 ```python
-data = client.get_placements_stat_all("START_DATE", "STOP_DATE")
+start_date = datetime.date(2022, 1,1)
+stop_date = datetime.date(2022, 12,31)
+data = client.get_placements_stat_all(start_date, stop_date)
 ```    
-Получение статистики размещений по выбранным кампаниям.
-* ``start_date — дата начала(включительно) периода в формате YYYY-MM-DD``
-* ``stop_date — дата конца(включительно) периода, в формате YYYY-MM-DD``
 
 ```python
-data = client.get_placements_stat(list["PLACEMENT_ID"],"START_DATE", "STOP_DATE")
+start_date = datetime.date(2022, 1,1)
+stop_date = datetime.date(2022, 12,31)
+data = client.get_placements_stat(list["PLACEMENT_ID"],start_date, stop_date)
 ```    
 
 Получение статистики по всем кампаниям по дням.
-* ``start_date — дата начала(включительно) периода в формате YYYY-MM-DD``
-* ``stop_date — дата конца(включительно) периода, в формате YYYY-MM-DD``
-
 ```python        
-data = client.get_placements_stat_by_day("START_DATE", "STOP_DATE")
+start_date = datetime.date(2022, 1,1)
+stop_date = datetime.date(2022, 12,31)
+data = client.get_placements_stat_by_day(start_date, stop_date)
 ```
 
 Получение статистики по выбранной кампании по дням.
-* ``start_date — дата начала(включительно) периода в формате YYYY-MM-DD``
-* ``stop_date — дата конца(включительно) периода, в формате YYYY-MM-DD``
-
-```python        
-data = client.get_placement_stat_by_day("PLACEMENT_ID", "START_DATE", "STOP_DATE")
+```python    
+start_date = datetime.date(2022, 1,1)
+stop_date = datetime.date(2022, 12,31)    
+data = client.get_placement_stat_by_day("PLACEMENT_ID", start_date, stop_date)
 ```
